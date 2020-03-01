@@ -207,7 +207,7 @@ struct
   (* create low high -- Returns a new interval covering `low` to
      `high` inclusive. If `low` is greater than `high`, then the
      interval is empty. *)
-  let create (low : Endpoint.t) (high : Endpoint.t) : interval =
+  let create (low : endpoint) (high : endpoint) : interval =
     if Endpoint.compare low high > 0
     then Empty
     else Interval (low, high)
@@ -225,12 +225,10 @@ struct
     match intvl with
     | Empty -> false
     | Interval (low, high) ->
-      Endpoint.compare x low >= 0 && Endpoint.compare x high <= 0
+      Endpoint.compare x low >= 0
+      && Endpoint.compare x high <= 0
   (* intersect intvl1 intvl2 -- Returns the intersection of `intvl1`
      and `intvl2` *)
-(*
-make a helper function that returns them ascended order, take bigger one from first
-and lower one from second- then call create to see  *)
 
   let intersect (intvl1 : interval) (intvl2 : interval) : interval =
     let ordered x y = if Endpoint.compare x y <= 0 then x, y else y, x in
@@ -241,7 +239,7 @@ and lower one from second- then call create to see  *)
       let (_, low), (high, _) = ordered low1 low2, ordered high1 high2 in
       create low high
 
-  end ;;
+end ;;
 
 (* We have successfully made our returned module abstract, but believe
 it or not, it is now too abstract. In fact, we have not exposed the
