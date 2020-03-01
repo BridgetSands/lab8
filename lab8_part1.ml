@@ -112,7 +112,8 @@ module MakeInterval (Endpoint : ORDERED_TYPE) =
       match intvl with
       | Empty -> false
       | Interval (low, high) ->
-        Endpoint.compare x low >= 0 && Endpoint.compare x high <= 0
+        Endpoint.compare x low >= 0
+        && Endpoint.compare x high <= 0
     (* intersect intvl1 intvl2 -- Returns the intersection of `intvl1`
        and `intvl2` *)
 
@@ -207,8 +208,7 @@ struct
      `high` inclusive. If `low` is greater than `high`, then the
      interval is empty. *)
   let create (low : endpoint) (high : endpoint) : interval =
-    if Endpoint.compare low high > 0
-    then Empty
+    if Endpoint.compare low high > 0 then Empty
     else Interval (low, high)
 
   (* is_empty intvl -- Returns true if and only if `intvl` is
@@ -311,8 +311,7 @@ module MakeBestInterval (Endpoint : ORDERED_TYPE):
     | Empty
 
     let create (low : endpoint) (high : endpoint) : interval =
-      if Endpoint.compare low high > 0
-      then Empty
+      if Endpoint.compare low high > 0 then Empty
       else Interval (low, high)
 
     let is_empty (intvl : interval) : bool =
