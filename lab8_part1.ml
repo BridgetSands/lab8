@@ -103,9 +103,9 @@ module MakeInterval (Endpoint : ORDERED_TYPE) =
     (* is_empty intvl -- Returns true if and only if `intvl` is
        empty *)
     let is_empty (intvl : interval) : bool =
-      if intvl = Empty
-      then true
-      else false
+      match intvl with
+      | Empty -> true
+      | Interval _ -> false
 
     (* contains intvl x -- Returns true if and only if the value `x`
        is contained within `intvl` *)
@@ -116,12 +116,7 @@ module MakeInterval (Endpoint : ORDERED_TYPE) =
         Endpoint.compare x low >= 0 && Endpoint.compare x high <= 0
     (* intersect intvl1 intvl2 -- Returns the intersection of `intvl1`
        and `intvl2` *)
-(*
-make a helper function that returns them ascended order, take bigger one from first
-and lower one from second- then call create to see  *)
 
-    let helper (first : Endpoint.t) (second : Endpoint.t) : interval =
-      if Endpoint.compare
 
     let intersect (intvl1 : interval) (intvl2 : interval) : interval =
       let ordered x y = if Endpoint.compare x y <= 0 then x, y else y, x in
@@ -131,6 +126,7 @@ and lower one from second- then call create to see  *)
       | Interval (low1, high1), Interval (low2, high2) ->
         let (_, low), (high, _) = ordered low1 low2, ordered high1 high2 in
         create low high
+
     end ;;
 
 (*......................................................................
