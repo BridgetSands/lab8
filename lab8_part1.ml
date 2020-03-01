@@ -232,9 +232,6 @@ struct
 make a helper function that returns them ascended order, take bigger one from first
 and lower one from second- then call create to see  *)
 
-  let helper (first : Endpoint.t) (second : Endpoint.t) : interval =
-    if Endpoint.compare
-
   let intersect (intvl1 : interval) (intvl2 : interval) : interval =
     let ordered x y = if Endpoint.compare x y <= 0 then x, y else y, x in
     match intvl1, intvl2 with
