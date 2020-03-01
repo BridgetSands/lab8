@@ -215,9 +215,9 @@ struct
   (* is_empty intvl -- Returns true if and only if `intvl` is
      empty *)
   let is_empty (intvl : interval) : bool =
-    if intvl = Empty
-    then true
-    else false
+    match intvl with
+    | Empty -> true
+    | Interval _ -> false
 
   (* contains intvl x -- Returns true if and only if the value `x`
      is contained within `intvl` *)
@@ -240,6 +240,7 @@ and lower one from second- then call create to see  *)
     | Interval (low1, high1), Interval (low2, high2) ->
       let (_, low), (high, _) = ordered low1 low2, ordered high1 high2 in
       create low high
+
   end ;;
 
 (* We have successfully made our returned module abstract, but believe
