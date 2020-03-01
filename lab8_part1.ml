@@ -148,7 +148,7 @@ overlap, and calculate their intersection as `intvl1_intersect_intvl2`.
 
 let intvl1 = IntInterval.create 3 8 ;;
 let intvl2 = IntInterval.create 4 10 ;;
-let intvl1_intersect_intvl2 = IntINterval.intersect intvl1 intvl2 ;;
+let intvl1_intersect_intvl2 = IntInterval.intersect intvl1 intvl2 ;;
 
 (* There's currently a problem with the `MakeInterval` functor. It's
 not abstract enough. Notably we are working with an invariant that a
